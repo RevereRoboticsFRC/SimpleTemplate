@@ -16,18 +16,25 @@ public:
 		myRobot(1, 2),	// these must be initialized in the same order
 		stick(1)		// as they are declared above.
 	{
+		cout << "Good morning!" << endl;
 		myRobot.SetExpiration(0.1);
 	}
 
 	/**
-	 * Drive left & right motors for 2 seconds then stop
+	 * Do auto stuff
 	 */
 	void Autonomous()
 	{
+		cout << "Hello autonomous!" << endl;
 		myRobot.SetSafetyEnabled(false);
-		myRobot.Drive(-0.5, 0.0); 	// drive forwards half speed
-		Wait(2.0); 				//    for 2 seconds
+		myRobot.Drive(-0.125, 0.0); 	// drive forwards half speed
+		Wait(5.0); 				//    for 5 seconds
 		myRobot.Drive(0.0, 0.0); 	// stop robot
+		Wait(1.0);				//		Wait 1 sec
+		myRobot.Drive(-0.125, 0.25);	//	Drive fwd @ 1/2 speed, 0.25 curve (right?)
+		Wait(1.0);
+		myRobot.Drive(0, 0);
+		cout << "Bye autonomous!" << endl;
 	}
 
 	/**
@@ -35,19 +42,24 @@ public:
 	 */
 	void OperatorControl()
 	{
+		cout << "Hello operator!" << endl;
 		myRobot.SetSafetyEnabled(true);
 		while (IsOperatorControl())
 		{
+			
 			myRobot.ArcadeDrive(stick); // drive with arcade style (use right stick)
 			Wait(0.005);				// wait for a motor update time
 		}
+		cout << "Bye operator!" << endl;
 	}
 	
 	/**
 	 * Runs during test mode
 	 */
 	void Test() {
-
+		cout << "Hello test!" << endl;
+		
+		cout << "Bye test!" << endl;
 	}
 };
 
